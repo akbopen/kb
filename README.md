@@ -2,45 +2,44 @@
 
 # Services - Frameworks
 
-## Pub/Sub
-### Kafka
+## Pub/Sub - Distributed Message System
+- Kafka
 
 ## Relational DB Managment System
-### MySQL
+- MySQL
 
 ## Object-Relational DB management System
-### PostgreSQL
+- PostgreSQL
 
 ## Distributed Time Series Database
-### InfluxDB
+- InfluxDB
 
 ## In-Memory Data structure store, NoSQL DB
-### Redis
+- Redis
 
 ## Distributed NoSQL DB
-### Cassandra
+- Cassandra
 
 ## Metrics Dashboard
-### Grafana
+- Grafana
 
 ## Search & Analyze Data in Real Time
-### Elasticsearch
+- Elasticsearch
 
 
 # Clound
 
-## Ali
+- Ali
 
-## AWS
-- Start from AWS?
+- AWS, Start from AWS?
 
-## Google
+- Google
 
-## Azure
+- Azure
 
-## DigitalOcean
+- DigitalOcean
 
-## UpClound
+- UpClound
 
 # Service Region Comparation
 - per Continent/Country/Market
@@ -51,9 +50,9 @@
 # Payment
 
 # Startup Operation
-## How is a startup running/organizing?
+- How is a startup running/organizing?
 
-## How to market?
+- How to market?
 
 ## Security
 
