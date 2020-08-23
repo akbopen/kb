@@ -47,14 +47,18 @@
 # Service Plan Comparation
 - Grasp? Compare after discount?
 
-# Payment
+# Payment functionality?
+# Web GUI functionality
+# Prototype: Web GUI -> restful setup services on different cloud?
+# Use cases
+- [Streaming data pipeline using Kafka, KSQL, InfluxDB and Grafana](https://medium.com/@ketulsheth2/streaming-data-pipeline-using-kafka-ksql-influxdb-and-grafana-8a934569fcb9)
 
 # Startup Operation
 - How is a startup running/organizing?
 
 - How to market?
 
-## Security
+## Security?
 
 ## Law/IP issues
 
