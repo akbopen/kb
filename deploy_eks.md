@@ -66,7 +66,7 @@ Create an IAM OpenID Connect (OIDC) provider for your cluster so that Kubernetes
 
 # Step 4: Create nodes
 ## 1. Create an IAM role for the Amazon VPC CNI plugin
-### a. Copy the following contents to a file named cni-role-trust-policy.json. Replace <111122223333> (including <>) with your account ID and replace <XXXXXXXXXX45D83924220DC4815XXXXX> with the value after the last / of your OpenID Connect provider URL.
+### a. Copy the following contents to a file named airformex-cni-role-trust-policy.json. Replace <111122223333> (including <>) with your account ID and replace <XXXXXXXXXX45D83924220DC4815XXXXX> with the value after the last / of your OpenID Connect provider URL.
 
 ```
 {
@@ -91,7 +91,7 @@ Create an IAM OpenID Connect (OIDC) provider for your cluster so that Kubernetes
 ```
 aws iam create-role \
   --role-name AirFormexEKSCNIRole \
-  --assume-role-policy-document file://"cni-role-trust-policy.json"
+  --assume-role-policy-document file://"airformex-cni-role-trust-policy.json"
 ```
 ### c. Attach the required Amazon EKS managed IAM policy to the role. 
 ```
@@ -107,7 +107,7 @@ aws eks update-addon \
   --service-account-role-arn arn:aws:iam::213397327449:role/AirFormexEKSCNIRole 
 ```
 ## 3. Create a node IAM role and attach the required Amazon EKS IAM managed policy to it.
-### a. Copy the following contents to a file named `node-role-trust-policy.json`. 
+### a. Copy the following contents to a file named `airformex-node-role-trust-policy.json`. 
 ```
 {
   "Version": "2012-10-17",
@@ -126,7 +126,7 @@ aws eks update-addon \
 ```
 aws iam create-role \
   --role-name AirFormexEKSNodeRole \
-  --assume-role-policy-document file://"node-role-trust-policy.json"
+  --assume-role-policy-document file://"airformex-node-role-trust-policy.json"
 ```
 ### c. Attach the required Amazon EKS managed IAM policies to the role. 
 ```
@@ -147,7 +147,7 @@ aws iam attach-role-policy \
 ## 9. On the Set compute and scaling configuration page, accept the default values and select Next.
 ## 10. On the Specify networking page, select an existing key pair to use for SSH key pair and then choose Next. 
 ```
-aws ec2 create-key-pair --region ap-southeast-2 --key-name myKeyPair
+aws ec2 create-key-pair --region ap-southeast-2 --key-name AirFormexKeyPair
 ```
 ## 11. On the Review and create page, review your managed node group configuration and choose Create.
 ## 12. After several minutes, the Status in the Node Group configuration section will change from Creating to Active. Don't continue to the next step until the status is Active.
