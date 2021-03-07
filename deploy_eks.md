@@ -80,7 +80,7 @@ Create an IAM OpenID Connect (OIDC) provider for your cluster so that Kubernetes
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.us-west-2.amazonaws.com/id/C7AD155D771A5964308FAEC6830A0043:sub": "system:serviceaccount:kube-system:aws-node"
+          "oidc.eks.ap-southeast-2.amazonaws.com/id/C7AD155D771A5964308FAEC6830A0043:sub": "system:serviceaccount:kube-system:aws-node"
         }
       }
     }
