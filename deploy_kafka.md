@@ -214,7 +214,7 @@ spec:
         - name: KAFKA_ADVERTISED_PORT
           value: "9092"
         - name: KAFKA_ADVERTISED_HOST_NAME
-          value: <dns_name_kafka_service_1>
+          value: <dns_name_kafka_service_2>
         - name: KAFKA_ZOOKEEPER_CONNECT
           value: zoo1:2181,zoo2:2181
 ```
@@ -222,7 +222,7 @@ spec:
 ```
 kubectl create -f kafka-cluster.yaml
 # view services
-kubectl get services
+kubectl get pod
 ```
 6. Test with connecting to Kafka broker
 
