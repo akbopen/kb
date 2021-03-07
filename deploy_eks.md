@@ -62,7 +62,7 @@ Create an IAM OpenID Connect (OIDC) provider for your cluster so that Kubernetes
 5. Choose Add Provider.
 6. For Provider Type, choose OpenID Connect.
 7. For Provider URL, paste the OIDC provider URL for your cluster from step two, and then choose Get thumbprint.
-8. For Audience, enter sts.amazonaws.com and choose Add provider.
+8. For Audience, enter `sts.amazonaws.com` and choose Add provider.
 
 # Step 4: Create nodes
 ## 1. Create an IAM role for the Amazon VPC CNI plugin
