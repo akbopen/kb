@@ -116,68 +116,10 @@ kubectl create -f zookeeper-service.yaml
 # view services
 kubectl get services
 ```
-# Deploy Kafka
-1. Create kafaka deployment
 
-`kafka-cluster.yaml`
-```
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  name: kafka1
-spec:
-  replicas: 1
-  selector:
-    app: kafka1
-  template:
-    metadata:
-      labels:
-        app: kafka1
-    spec:
-      containers:
-      - name: kafka1
-        image: wurstmeister/kafka
-        ports:
-        - containerPort: 9092
-        env:
-        - name: KAFKA_BROKER_ID
-          value: "1"
-        - name: KAFKA_ADVERTISED_PORT
-          value: "9092"
-        - name: KAFKA_ADVERTISED_HOST_NAME
-          value: ec2-3-25-60-114.ap-southeast-2.compute.amazonaws.com
-        - name: KAFKA_ZOOKEEPER_CONNECT
-          value: zoo1:2181,zoo2:2181
----
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  name: kafka2
-spec:
-  replicas: 1
-  selector:
-    app: kafka2
-  template:
-    metadata:
-      labels:
-        app: kafka2
-    spec:
-      containers:
-      - name: kafka2
-        image: wurstmeister/kafka
-        ports:
-        - containerPort: 9092
-        env:
-        - name: KAFKA_BROKER_ID
-          value: "2"
-        - name: KAFKA_ADVERTISED_PORT
-          value: "9092"
-        - name: KAFKA_ADVERTISED_HOST_NAME
-          value: ec2-3-25-60-114.ap-southeast-2.compute.amazonaws.com
-        - name: KAFKA_ZOOKEEPER_CONNECT
-          value: zoo1:2181,zoo2:2181
-```
-2. Create kafka service `kafka-service.yaml`
+
+# Deploy Kafka
+1. Create kafka service template: `kafka-service.yaml`
 
 ```
 apiVersion: v1
@@ -206,16 +148,95 @@ spec:
   selector:
     app: kafka2
   ```
- 
-3. Create kafka service
+2. Create kafka service
 ```
-# create services
-kubectl create -f kafka-service.yaml# view services
+kubectl create -f kafka-service.yaml
+# view services
 kubectl get services
 ```
-4. Create kafka cluster
+3. Collect loadbalance dns name
 ```
-# create services
-kubectl create -f kafka-cluster.yaml# view services
 kubectl get services
+```
+4. Create kafaka deployment
+
+`kafka-cluster.yaml`
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kafka1
+spec:
+  replicas: 1
+  selector:
+    app: kafka1
+  template:
+    metadata:
+      labels:
+        app: kafka1
+    spec:
+      containers:
+      - name: kafka1
+        image: wurstmeister/kafka
+        ports:
+        - containerPort: 9092
+        env:
+        - name: KAFKA_BROKER_ID
+          value: "1"
+        - name: KAFKA_ADVERTISED_PORT
+          value: "9092"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: <dns_name_kafka_service_1>
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: zoo1:2181,zoo2:2181
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kafka2
+spec:
+  replicas: 1
+  selector:
+    app: kafka2
+  template:
+    metadata:
+      labels:
+        app: kafka2
+    spec:
+      containers:
+      - name: kafka2
+        image: wurstmeister/kafka
+        ports:
+        - containerPort: 9092
+        env:
+        - name: KAFKA_BROKER_ID
+          value: "2"
+        - name: KAFKA_ADVERTISED_PORT
+          value: "9092"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: <dns_name_kafka_service_1>
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: zoo1:2181,zoo2:2181
+```
+5. Create kafka cluster
+```
+kubectl create -f kafka-cluster.yaml
+# view services
+kubectl get services
+```
+6. Test with connecting to Kafka broker
+
+```
+kafkacat -L -b <kafka broker host>:<kafka broker port>
+```
+7. Create Publisher
+
+```
+kafkacat -P -b <kafka broker host>:<kafka broker port> <publisher-name>
+```
+
+8. Create Consumer
+
+```
+kafkacat -C -b <kafka broker host>:<kafka broker port> <publisher-name>
 ```
