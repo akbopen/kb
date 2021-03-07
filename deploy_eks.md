@@ -75,7 +75,7 @@ Create an IAM OpenID Connect (OIDC) provider for your cluster so that Kubernetes
     {
       "Effect": "Allow",
       "Principal": {
-        "Federated": "arn:aws:iam::213397327449:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/C7AD155D771A5964308FAEC6830A0043"
+        "Federated": "arn:aws:iam::213397327449:oidc-provider/oidc.eks.ap-southeast-2.amazonaws.com/id/C7AD155D771A5964308FAEC6830A0043"
       },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
